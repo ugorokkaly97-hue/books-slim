@@ -1,0 +1,79 @@
+{% extends 'layouts/base.twig' %}
+
+{% block title %}Список книг - Библиотека{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="page-title">
+            <i class="bi bi-book"></i> Каталог книг
+        </h1>
+        <span class="badge bg-primary rounded-pill p-3">
+            Всего книг: {{ books|length }}
+        </span>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="text-muted mb-0">
+            {% if user is null %}
+                Добро пожаловать, <span class="fw-normal">Гость</span>
+            {% else %}
+                С возвращением, <span class="fw-normal">{{ user.login }}</span>!
+            {% endif %}
+        </h5>
+    </div>
+
+    <div class="table-responsive">
+        <table class="custom-table">
+            <thead>
+            <tr class="table-header">
+                <td><i class="bi bi-bookmark"></i> Название</td>
+                <td><i class="bi bi-person"></i> Автор</td>
+                <td><i class="bi bi-check-circle"></i> Наличие</td>
+                <td><i class="bi bi-clock-history"></i> История</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+                <tr>
+                    <td><strong>{{ book.book_name }}</strong></td>
+                    <td>{{ book.author_name }}</td>
+                    <td>
+                        {% if book.available %}
+                            <span class="status-badge status-available">
+                                    <i class="bi bi-check-circle"></i> В наличии
+                                </span>
+                        {% else %}
+                            <span class="status-badge status-unavailable">
+                                    <i class="bi bi-x-circle"></i> Нет в наличии
+                                </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/admin/books/{{ book.id }}" class="btn btn-outline-primary btn-action">
+                            <i class="bi bi-clock-history"></i> История
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center py-5">
+                        <i class="bi bi-emoji-frown" style="font-size: 3rem;"></i>
+                        <p class="mt-3">Книг пока нет</p>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if session.debug is defined %}
+        <div style="background: #f0f0f0; padding: 10px; margin-top: 20px;">
+            <h4>Debug log:</h4>
+            <ul>
+                {% for msg in session.debug %}
+                    <li>{{ msg }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

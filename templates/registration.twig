@@ -1,0 +1,49 @@
+{% extends 'layouts/base.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <a href="/" class="btn-back">
+            <i class="bi bi-arrow-left"></i> На главную
+        </a>
+    </div>
+
+    <div class="text-center mb-4">
+        <h1 class="page-title">
+            <i class="bi bi-person-plus"></i> Регистрация
+        </h1>
+    </div>
+
+    <div class="custom-form">
+        <form method="post" action="/registration">
+            <div class="mb-4">
+                <label for="login" class="form-label">
+                    <i class="bi bi-person"></i> Логин
+                </label>
+                <input type="text" class="form-control" id="login" name="login"
+                       placeholder="Введите логин" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="form-label">
+                    <i class="bi bi-lock"></i> Пароль
+                </label>
+                <input type="password" class="form-control" id="password" name="password"
+                       placeholder="Введите пароль" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="form-label">
+                    <i class="bi bi-lock"></i> Повторите пароль
+                </label>
+                <input type="password" class="form-control" id="confirmed_password" name="confirmed_password"
+                       placeholder="Повторите пароль" required>
+            </div>
+
+            <button type="submit" class="btn btn-submit">
+                <i class="bi bi-person-check"></i> Зарегистрироваться
+            </button>
+        </form>
+    </div>
+{% endblock %}

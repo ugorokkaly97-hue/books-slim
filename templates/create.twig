@@ -1,0 +1,49 @@
+{% extends 'layouts/base.twig' %}
+
+{% block title %}Добавление книги{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <a href="/" class="btn-back">
+            <i class="bi bi-arrow-left"></i> Назад к списку
+        </a>
+    </div>
+
+    <h1 class="page-title">
+        <i class="bi bi-plus-circle"></i> Добавление новой книги
+    </h1>
+
+    <div class="info-message">
+        <i class="bi bi-exclamation-triangle"></i>
+        <strong>Важно!</strong> Книга может быть добавлена только от существующего автора.
+        Если автора нет в списке, сначала добавьте его через панель администратора.
+    </div>
+
+    <div class="custom-form">
+        <form method="post" action="/admin/books/create">
+            <div class="mb-4">
+                <label for="name" class="form-label">
+                    <i class="bi bi-book"></i> Название книги
+                </label>
+                <input type="text" class="form-control" id="name" name="name"
+                       placeholder="Введите название книги" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="author" class="form-label">
+                    <i class="bi bi-person"></i> Автор книги
+                </label>
+                <select class="form-select" name="author_id" required>
+                    <option value="" selected disabled>Выберите автора из списка</option>
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">{{ author.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-submit">
+                <i class="bi bi-plus-circle"></i> Добавить книгу
+            </button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --success-color: #06d6a0;
+            --danger-color: #ef476f;
+            --warning-color: #ffd166;
+            --dark-color: #2b2d42;
+            --light-color: #f8f9fa;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar-custom {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #7209b7 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .navbar-custom .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-custom .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 2rem;
+        }
+
+        .page-title {
+            color: var(--dark-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+
+        .custom-table tr {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .custom-table tr:hover {
+            transform: scale(1.01);
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.1);
+        }
+
+        .custom-table td {
+            padding: 15px;
+            border: none;
+            vertical-align: middle;
+        }
+
+        .custom-table td:first-child {
+            border-radius: 12px 0 0 12px;
+        }
+
+        .custom-table td:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+        .table-header {
+            background: transparent !important;
+            box-shadow: none !important;
+            font-weight: 600;
+            color: var(--dark-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .table-header td {
+            background: transparent !important;
+            padding: 10px 15px;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-available {
+            background: rgba(6, 214, 160, 0.15);
+            color: #04997a;
+            border: 1px solid rgba(6, 214, 160, 0.3);
+        }
+
+        .status-unavailable {
+            background: rgba(239, 71, 111, 0.15);
+            color: #d13b5e;
+            border: 1px solid rgba(239, 71, 111, 0.3);
+        }
+
+        .btn-action {
+            border-radius: 25px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0 3px;
+        }
+
+        .btn-action i {
+            margin-right: 5px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .custom-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #7209b7 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            width: 100%;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-back {
+            background: white;
+            color: var(--dark-color);
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            padding: 0.5rem 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-back:hover {
+            background: #f8f9fa;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .info-message {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            color: var(--dark-color);
+        }
+
+        .action-bar {
+            background: transparent;
+            padding: 1rem 0;
+        }
+
+        .clear {
+            border: none !important;
+            background: transparent !important;
+        }
+    </style>
+    <title>{% block title %}Библиотека{% endblock %}</title>
+</head>
+<body>
+
+<nav class="navbar-custom">
+    <div class="container">
+        <div class="d-flex justify-content-end gap-2">
+            {% if user is null or user.login is empty %}
+                <a href="/registration" class="btn btn-light">
+                    <i class="bi bi-person-plus"></i> Регистрация
+                </a>
+                <a href="/login" class="btn btn-outline-light">
+                    <i class="bi bi-box-arrow-in-right"></i> Вход
+                </a>
+            {% else %}
+                <a href="/logout" class="btn btn-outline-light"
+                   onclick="return confirm('Вы уверены, что хотите выйти?')">
+                    <i class="bi bi-box-arrow-right"></i> Выйти ({{ user.login }})
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="main-container">
+    <div class="content-card">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

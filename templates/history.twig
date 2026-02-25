@@ -1,0 +1,68 @@
+{% extends 'layouts/base.twig' %}
+
+{% block title %}История книги {{ book.name }}{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <a href="/" class="btn-back">
+            <i class="bi bi-arrow-left"></i> Назад к списку
+        </a>
+    </div>
+
+    <h1 class="page-title">
+        <i class="bi bi-clock-history"></i> История книги "{{ book.name }}"
+    </h1>
+
+    <div class="info-message">
+        <i class="bi bi-info-circle"></i>
+        Полная история использования книги
+    </div>
+
+    <div class="table-responsive">
+        <table class="custom-table">
+            <thead>
+            <tr class="table-header">
+                <td><i class="bi bi-person"></i> Пользователь</td>
+                <td><i class="bi bi-calendar-plus"></i> Дата выдачи</td>
+                <td><i class="bi bi-calendar-check"></i> Дата возврата</td>
+                <td><i class="bi bi-clock"></i> Статус</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for histor in history %}
+                <tr>
+                    <td><strong>{{ histor.user }}</strong></td>
+                    <td>{{ histor.date_begin|date('d.m.Y') }}</td>
+                    <td>
+                        {% if histor.date_end %}
+                            {{ histor.date_end|date('d.m.Y') }}
+                        {% else %}
+                            <span class="status-badge status-available">
+                                    <i class="bi bi-arrow-repeat"></i> Ещё на руках
+                                </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if histor.date_end %}
+                            <span class="status-badge status-available">
+                                    <i class="bi bi-check-circle"></i> Возвращена
+                                </span>
+                        {% else %}
+                            <span class="status-badge status-unavailable">
+                                    <i class="bi bi-book"></i> У читателя
+                                </span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center py-5">
+                        <i class="bi bi-journal" style="font-size: 3rem;"></i>
+                        <p class="mt-3">История использования пуста</p>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

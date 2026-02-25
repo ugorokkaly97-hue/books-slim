@@ -1,0 +1,61 @@
+{% extends 'layouts/base.twig' %}
+
+{% block title %}Редактирование книги - {{ book.book_name }}{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <a href="/" class="btn-back">
+            <i class="bi bi-arrow-left"></i> Назад к списку
+        </a>
+    </div>
+
+    <h1 class="page-title">
+        <i class="bi bi-pencil-square"></i> Редактирование книги
+    </h1>
+
+    <div class="info-message">
+        <i class="bi bi-info-circle"></i>
+        Редактирование книги "{{ book.book_name }}"
+    </div>
+
+    <div class="custom-form">
+        <form method="post" action="/admin/books/update/{{ book.id }}">
+            <div class="mb-4">
+                <label for="name" class="form-label">
+                    <i class="bi bi-book"></i> Название книги
+                </label>
+                <input type="text" class="form-control" id="name" name="name"
+                       value="{{ book.book_name }}" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="author" class="form-label">
+                    <i class="bi bi-person"></i> Автор книги
+                </label>
+                <select class="form-select" name="author_id" required>
+                    <option value="{{ book.author_id }}">{{ book.author_name }}</option>
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">{{ author.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="available" class="form-label">
+                    <i class="bi bi-check-circle"></i> Наличие
+                </label>
+                <select class="form-select" name="available" required>
+                    <option value="{{ book.available ? '1' : '0' }}" selected>
+                        {{ book.available ? 'Есть в наличии' : 'Нет в наличии' }}
+                    </option>
+                    <option value="0">Нет в наличии</option>
+                    <option value="1">Есть в наличии</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-submit">
+                <i class="bi bi-save"></i> Сохранить изменения
+            </button>
+        </form>
+    </div>
+{% endblock %}
